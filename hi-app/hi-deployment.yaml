@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hi-html-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hi-html
+  template:
+    metadata:
+      labels:
+        app: hi-html
+    spec:
+      containers:
+      - name: hi-html
+        image: 059941825967.dkr.ecr.ap-south-1.amazonaws.com/welcome:latest
+        ports:
+          - containerPort: 80

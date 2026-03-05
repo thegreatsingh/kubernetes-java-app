@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: java-calculator-deployment
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-calculator
+  template:
+    metadata:
+      labels:
+        app: java-calculator
+    spec:
+      containers:
+      - name: java-calculator
+        image: 059941825967.dkr.ecr.ap-south-1.amazonaws.com/java-calculator-repo:latest
+        ports:
+          - containerPort: 9090
