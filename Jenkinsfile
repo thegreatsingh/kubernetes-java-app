@@ -20,7 +20,7 @@ pipeline {
         stage('Build Calculator Docker Image') {
             steps {
                 sh '''
-                docker build -t java-calculator .
+                sudo docker build -t java-calculator .
                 '''
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('Build HI App Docker Image') {
             steps {
                 sh '''
-                docker build -t hi-app ./hi-app
+                sudo docker build -t hi-app ./hi-app
                 '''
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 sh '''
                 aws ecr get-login-password --region $AWS_REGION |
-                docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+                sudo docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
                 '''
             }
         }
@@ -45,8 +45,8 @@ pipeline {
         stage('Push Calculator Image') {
             steps {
                 sh '''
-                docker tag java-calculator:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
-                docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
+                sudo docker tag java-calculator:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
+                sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
                 '''
             }
         }
@@ -54,8 +54,8 @@ pipeline {
         stage('Push HI App Image') {
             steps {
                 sh '''
-                docker tag hi-app:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
-                docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
+                sudo docker tag hi-app:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
+                sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
                 '''
             }
         }
