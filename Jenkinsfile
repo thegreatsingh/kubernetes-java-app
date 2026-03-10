@@ -75,7 +75,7 @@ pipeline {
         stage('Deploy HI App') {
             steps {
                 sh '''
-                kubectl set image deployment/hi-deployment \
+                kubectl set image deployment/hi-html-deployment \
                 hi-html=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
                 '''
             }
