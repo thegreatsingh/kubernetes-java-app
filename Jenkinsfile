@@ -68,6 +68,8 @@ pipeline {
                 sh '''
                 kubectl set image deployment/java-calculator-deployment \
                 java-calculator=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
+                kubectl rollout restart deployment/java-calculator-deployment
+                kubectl rollout status deployment/java-calculator-deployment
                 '''
             }
         }
@@ -77,6 +79,8 @@ pipeline {
                 sh '''
                 kubectl set image deployment/hi-html-deployment \
                 hi-html=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
+                kubectl rollout restart deployment/hi-html-deployment
+                kubectl rollout status deployment/hi-html-deployment
                 '''
             }
         }
