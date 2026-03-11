@@ -18,7 +18,7 @@ pipeline {
 
         stage('SonarQube Code Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonar-server') {
                     sh '''
                     mvn sonar:sonar \
                     -Dsonar.projectKey=java-calculator \
