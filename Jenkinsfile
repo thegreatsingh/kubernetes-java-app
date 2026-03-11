@@ -22,7 +22,7 @@ pipeline {
                     sh '''
                     mvn sonar:sonar \
                     -Dsonar.projectKey=java-calculator \
-                    -Dsonar.host.url=http://13.204.156.235:9000 \
+                    -Dsonar.host.url=http://13.204.156.235 \
                     -Dsonar.login=squ_ea6d190bb1e77789299d431ed9e47e77289c2488
                     '''
                 }
