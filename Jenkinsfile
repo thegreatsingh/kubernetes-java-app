@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCOUNT_ID = "059941825967"
-        AWS_REGION = "ap-south-1"
+        AWS_ACCOUNT_ID = "858321320845"
+        AWS_REGION = "us-east-2"
         CALC_REPO = "java-calculator-repo"
         HI_REPO = "welcome"
         IMAGE_TAG = "latest"
