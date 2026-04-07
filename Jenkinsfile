@@ -90,12 +90,14 @@ pipeline {
         stage('Deploy Calculator App') {
             steps {
                 sh '''
-                kubectl apply -f kubernetes/calculator-deployment.yaml
+                # 1. Create/Update the Deployment and the Service
+                kubectl apply -f deployment.yaml
+                kubectl apply -f service.yaml
                 
+                # 2. Update to the latest ECR image
                 kubectl set image deployment/java-calculator-deployment \
                 java-calculator=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
 
-                kubectl rollout restart deployment/java-calculator-deployment
                 kubectl rollout status deployment/java-calculator-deployment
                 '''
             }
@@ -104,12 +106,14 @@ pipeline {
         stage('Deploy HI App') {
             steps {
                 sh '''
-                kubectl apply -f kubernetes/hi-app-deployment.yaml
+                # 1. Create/Update the Deployment and the Service
+                kubectl apply -f hi-app/hi-deployment.yaml
+                kubectl apply -f hi-app/hi-service.yaml
 
+                # 2. Update to the latest ECR image
                 kubectl set image deployment/hi-html-deployment \
                 hi-html=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$HI_REPO:latest
 
-                kubectl rollout restart deployment/hi-html-deployment
                 kubectl rollout status deployment/hi-html-deployment
                 '''
             }
