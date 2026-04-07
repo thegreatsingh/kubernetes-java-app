@@ -90,9 +90,8 @@ pipeline {
         stage('Deploy Calculator App') {
             steps {
                 sh '''
-                # THIS IS THE MISSING PIECE: Create the resource first!
-                kubectl apply -f kubernetes/calculator-deployment.yaml 
-        
+                kubectl apply -f kubernetes/calculator-deployment.yaml
+                
                 kubectl set image deployment/java-calculator-deployment \
                 java-calculator=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CALC_REPO:latest
 
@@ -105,7 +104,6 @@ pipeline {
         stage('Deploy HI App') {
             steps {
                 sh '''
-                # Create the resource first!
                 kubectl apply -f kubernetes/hi-app-deployment.yaml
 
                 kubectl set image deployment/hi-html-deployment \
@@ -114,11 +112,9 @@ pipeline {
                 kubectl rollout restart deployment/hi-html-deployment
                 kubectl rollout status deployment/hi-html-deployment
                 '''
-                }
+            }
         }
 
         
-
-        }
     }
 }
