@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCOUNT_ID = "858321320845"
+        AWS_ACCOUNT_ID = "197446684998"
         AWS_REGION = "us-east-2"
         CALC_REPO = "java-calculator-repo"
         HI_REPO = "welcome"
@@ -22,7 +22,7 @@ pipeline {
                     sh '''
                     mvn sonar:sonar \
                     -Dsonar.projectKey=java-calculator \
-                    -Dsonar.host.url=http://18.118.1.22 \
+                    -Dsonar.host.url=http://18.191.253.191 \
                     -Dsonar.login=sqa_9170b81b4c471396a60a3484d6ec1cab452d8302
                     '''
                 }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'myAwsUser'
+                    credentialsId: 'TestUser'
                 ]]) {
                     sh '''
                     aws ecr get-login-password --region $AWS_REGION \
