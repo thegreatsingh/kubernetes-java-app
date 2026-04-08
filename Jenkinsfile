@@ -109,6 +109,7 @@ pipeline {
                 # 1. Create/Update the Deployment and the Service
                 kubectl apply -f hi-app/hi-deployment.yaml
                 kubectl apply -f hi-app/hi-service.yaml
+                kubectl apply -f hi-app/ingress.yaml
 
                 # 2. Update to the latest ECR image
                 kubectl set image deployment/hi-html-deployment \
@@ -119,13 +120,6 @@ pipeline {
             }
         }
 
-        stage('Apply Ingress') { 
-            steps {
-                sh '''
-                kubectl apply -f ingress.yaml
-                '''
-            }
-        }
             
     }
 }
