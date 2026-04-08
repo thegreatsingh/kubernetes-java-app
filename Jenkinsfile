@@ -118,8 +118,6 @@ pipeline {
                 kubectl rollout status deployment/hi-html-deployment
                 '''
             }
-        }
-
-            
+        }      
     }
 }
