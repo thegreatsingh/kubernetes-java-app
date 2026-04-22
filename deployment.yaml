@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: java-calculator
-        image: 059941825967.dkr.ecr.ap-south-1.amazonaws.com/java-calculator-repo:latest
+        # Updated to your correct Account ID and Region
+        image: 197446684998.dkr.ecr.us-east-2.amazonaws.com/java-calculator-repo:latest
         ports:
           - containerPort: 9090
